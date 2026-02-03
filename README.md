@@ -1,6 +1,6 @@
-# nanostream
+# nanoStream
 
-**nanostream** is an ultra‑low‑latency event pipeline for Python, powered by a C++ lock‑free engine and pybind11.  
+**nanoStream** is an ultra‑low‑latency event pipeline for Python, powered by a C++ lock‑free engine and pybind11.  
 It’s designed for real‑time bots, data ingestion systems, and HFT‑style event processing.
 
 ---
