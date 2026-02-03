@@ -59,3 +59,20 @@ flowchart LR
     D --> E
     E --> F
 ```
+
+```mermaid
+sequenceDiagram
+    participant R as Reddit API
+    participant I as C++ Ingest Thread
+    participant Q as Lock-Free Ring Buffer
+    participant F as Filtering Engine
+    participant B as Batching Engine
+    participant P as Python Callback
+
+    R ->> I: Fetch new posts
+    I ->> Q: Push events
+    Q ->> F: Pop event
+    F ->> B: Filtered event
+    B ->> P: Dispatch to Python
+    P ->> P: Send to Discord
+```
