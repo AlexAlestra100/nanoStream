@@ -41,10 +41,18 @@ p.start(on_event)
 ## 🧱 Architecture
 
 ```mermaid
-flowchart TD
-    A[Reddit API] --> B[C++ Ingest Thread]
-    B --> C[Lock-Free Ring Buffer]
-    C --> D[C++ Filtering & Dedup Engine]
-    D --> E[C++ Batching / Rate Limiter]
-    E --> F[Python Callback → Discord]
+sequenceDiagram
+    participant R as Reddit API
+    participant I as C++ Ingest Thread
+    participant Q as Lock-Free Ring Buffer
+    participant F as Filtering Engine
+    participant B as Batching Engine
+    participant P as Python Callback
+
+    R ->> I: Fetch new posts
+    I ->> Q: Push events
+    Q ->> F: Pop event
+    F ->> B: Filtered event
+    B ->> P: Dispatch to Python
+    P ->> P: Send to Discord
 ```
