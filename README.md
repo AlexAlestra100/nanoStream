@@ -40,12 +40,11 @@ p.start(on_event)
 
 ## 🧱 Architecture
 
-Reddit API → C++ Ingest Thread
-                ↓
-        Lock-Free Ring Buffer
-                ↓
-      C++ Filtering + Dedup Engine
-                ↓
-      C++ Batching / Rate Limiter
-                ↓
-         Python Callback → Discord
+```mermaid
+flowchart TD
+    A[Reddit API] --> B[C++ Ingest Thread]
+    B --> C[Lock-Free Ring Buffer]
+    C --> D[C++ Filtering & Dedup Engine]
+    D --> E[C++ Batching / Rate Limiter]
+    E --> F[Python Callback → Discord]
+```
